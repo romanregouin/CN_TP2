@@ -19,7 +19,7 @@ int main(int argc, char** argv){
     PrintMatrice(G);
     SetIdentity(G,G.rows);
     PrintMatrice(G);
-    matrice H = NewMatrice(n,3); //faire log2 de n
+    matrice H = NewMatrice(n,my_log_2(n)); //faire log2 de n
     PrintMatrice(H);
 
     /* int taille;
@@ -31,6 +31,18 @@ int main(int argc, char** argv){
 
     SetControleMat(H);
     PrintMatrice(H);
+    TransformControlMat(H);
+    PrintMatrice(H);
+
+    matrice P = GetPtrans(H);
+    PrintMatrice(P);
+
+    matrice Ptrans = Transpose(P);
+    PrintMatrice(Ptrans);
+
+    PrintMatrice(G);
+    CompleteG(G,Ptrans);
+    PrintMatrice(G);
 
     return EXIT_SUCCESS;
 }
