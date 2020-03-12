@@ -187,3 +187,22 @@ void CompleteG(matrice g, matrice p){
         iforp++;
     }
 }
+
+matrice ProduitMatriciel(matrice a, matrice b){
+    if(a.cols!=b.rows){
+        printf("Produit matriciel indéfini !\n");
+        exit(EXIT_FAILURE);
+    }
+    matrice res = NewMatrice(b.cols,a.rows);
+    int result = 0;
+    for(int i=0;i<a.rows;i++){
+        for(int j=0;j<res.cols;j++){
+            for(int k=0; k<a.cols;k++){
+                result += a.data[k+i*a.cols]*b.data[j+k*b.cols];
+            }
+            res.data[j+i*res.cols] = result%2;
+            result = 0;
+        }
+    }
+    return res;
+}

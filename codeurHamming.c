@@ -15,12 +15,17 @@ int main(int argc, char** argv){
         return EXIT_FAILURE;
     }
 
+    int len_word = 0;
+    for(int i=0;argv[3][i]!='\0';i++){
+        len_word++;
+    }
+    printf("Longuer du mot à coder : %d\n",len_word);
+
     matrice G = NewMatrice(n,k);
     PrintMatrice(G);
     SetIdentity(G,G.rows);
     PrintMatrice(G);
     matrice H = NewMatrice(n,my_log_2(n)); //faire log2 de n
-    PrintMatrice(H);
 
     /* int taille;
     int test = atoi(argv[3]);
@@ -30,19 +35,37 @@ int main(int argc, char** argv){
     }*/
 
     SetControleMat(H);
-    PrintMatrice(H);
-    TransformControlMat(H);
+    //TransformControlMat(H);
+    printf("Matrice de Controle H :\n");
     PrintMatrice(H);
 
     matrice P = GetPtrans(H);
-    PrintMatrice(P);
-
     matrice Ptrans = Transpose(P);
-    PrintMatrice(Ptrans);
-
-    PrintMatrice(G);
     CompleteG(G,Ptrans);
+    printf("Matrice Génératrice G :\n");
     PrintMatrice(G);
+
+    matrice u = NewMatrice(len_word,1);
+    int* u_binary = malloc(len_word*sizeof(int));
+    int u_nb = atoi(argv[3]);
+    int diviseur=1;
+    for(int i=0;i<len_word-1;i++){
+        diviseur*=10;
+    }
+    for(int i=0;i<len_word;i++){
+        u_binary[i] = u_nb/diviseur;
+        u_nb %= diviseur;
+        diviseur /= 10;
+    }
+    for(int i=0;i<len_word;i++){
+        u.data[i] = u_binary[i];
+    }
+    printf("Mot à coder u :\n");
+    PrintMatrice(u);
+
+    matrice v = ProduitMatriciel(u,G);
+    printf("Mot encodé v :\n");
+    PrintMatrice(v);
 
     return EXIT_SUCCESS;
 }
