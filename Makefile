@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS =-g -O0 -Wall -Werror
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-EXE = codeurHamming
+EXE = codeurHamming decodeurHamming
 
 all: $(EXE)
 
@@ -12,7 +12,11 @@ all: $(EXE)
 codeurHamming : codeurHamming.o
 	$(CC) $(CFLAGS) -o $@ $^
 
+decodeurHamming : decodeurHamming.o
+	$(CC) $(CFLAGS) -o $@ $^
+
 codeurHamming.o : matrice.h
+decodeurHamming.o : matrice.h
 
 .PHONY : clean
 

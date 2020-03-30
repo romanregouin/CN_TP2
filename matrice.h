@@ -48,6 +48,15 @@ void PrintMatrice(matrice m){
     printf("\n\n");
 }
 
+int IsMatriceZero(matrice m){
+    for(int i=0;i<m.cols;i++){
+        if(m.data[i]!=0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void SetIdentity(matrice m, int dim){
     for(int i=0;i<dim;i++){
         m.data[i*m.cols + i] = 1;
@@ -210,6 +219,7 @@ matrice ProduitMatriciel(matrice a, matrice b){
 matrice CalculBitsParite(matrice h, matrice u){
     matrice res, H;
     H = Transpose(h);
+    PrintMatrice(H);
     res = NewMatrice(h.cols,1);
     int puissance = 0;
     int j = 0;
@@ -223,7 +233,6 @@ matrice CalculBitsParite(matrice h, matrice u){
         }
     }
     int puissance_max = puissance-1;
-    PrintMatrice(res);
     int result = 0; 
     int pos;
     for(int z=0;z<H.cols;z++){
