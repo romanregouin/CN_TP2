@@ -214,7 +214,7 @@ matrice CalculBitsParite(matrice h, matrice u){
     int puissance = 0;
     int j = 0;
     for(int i=0; i< res.cols ;i++){
-        if(i==my_pow_2(puissance)){
+        if((i+1)==my_pow_2(puissance)){
             res.data[i] = 0;
             puissance++;
         }else{
@@ -222,22 +222,21 @@ matrice CalculBitsParite(matrice h, matrice u){
             j++;
         }
     }
+    int puissance_max = puissance-1;
     PrintMatrice(res);
-    puissance = 0;
-    int result = 0;  
-    for(int i=0;i<res.cols;i++){
-        printf("puiss %i : %d\n",puissance,my_pow_2(puissance));
-        if((i+1)==my_pow_2(puissance)){
-            for(int j=0;j<H.rows;j++){
-                    result += res.data[i] * H.data[i+j*H.cols];
-            }
-            if(result%2){
-                res.data[i] = 1;
-            }else{
-                res.data[i] = 5;
-            }
-            puissance++;
+    int result = 0; 
+    int pos;
+    for(int z=0;z<H.cols;z++){
+        for(int i=0;i<res.cols;i++){
+            result += res.data[i] * H.data[z+i*H.cols];
         }
+        pos = my_pow_2(puissance_max-z)-1;
+        if(result%2){
+            res.data[pos] = 1;
+        }else{
+            res.data[pos] = 0;
+        }
+        result = 0;
     }
     return res;
 }

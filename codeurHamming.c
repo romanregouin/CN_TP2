@@ -47,7 +47,7 @@ int main(int argc, char** argv){
 
     matrice u = NewMatrice(len_word,1);
     int* u_binary = malloc(len_word*sizeof(int));
-    int u_nb = atoi(argv[3]);
+    long long int u_nb = atoi(argv[3]);
     int diviseur=1;
     for(int i=0;i<len_word-1;i++){
         diviseur*=10;
