@@ -39,11 +39,11 @@ int main(int argc, char** argv){
     printf("Matrice de Controle H :\n");
     PrintMatrice(H);
 
-    matrice P = GetPtrans(H);
+    /*matrice P = GetPtrans(H);
     matrice Ptrans = Transpose(P);
     CompleteG(G,Ptrans);
     printf("Matrice Génératrice G :\n");
-    PrintMatrice(G);
+    PrintMatrice(G);*/
 
     matrice u = NewMatrice(len_word,1);
     int* u_binary = malloc(len_word*sizeof(int));
@@ -63,9 +63,12 @@ int main(int argc, char** argv){
     printf("Mot à coder u :\n");
     PrintMatrice(u);
 
-    matrice v = ProduitMatriciel(u,G);
+    matrice tmp = CalculBitsParite(H,u);
+    PrintMatrice(tmp);
+
+    /*matrice v = ProduitMatriciel(u,G);
     printf("Mot encodé v :\n");
-    PrintMatrice(v);
+    PrintMatrice(v);*/
 
     return EXIT_SUCCESS;
 }

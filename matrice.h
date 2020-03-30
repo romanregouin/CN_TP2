@@ -206,3 +206,38 @@ matrice ProduitMatriciel(matrice a, matrice b){
     }
     return res;
 }
+
+matrice CalculBitsParite(matrice h, matrice u){
+    matrice res, H;
+    H = Transpose(h);
+    res = NewMatrice(h.cols,1);
+    int puissance = 0;
+    int j = 0;
+    for(int i=0; i< res.cols ;i++){
+        if(i==my_pow_2(puissance)){
+            res.data[i] = 0;
+            puissance++;
+        }else{
+            res.data[i] = u.data[j];
+            j++;
+        }
+    }
+    PrintMatrice(res);
+    puissance = 0;
+    int result = 0;  
+    for(int i=0;i<res.cols;i++){
+        printf("puiss %i : %d\n",puissance,my_pow_2(puissance));
+        if((i+1)==my_pow_2(puissance)){
+            for(int j=0;j<H.rows;j++){
+                    result += res.data[i] * H.data[i+j*H.cols];
+            }
+            if(result%2){
+                res.data[i] = 1;
+            }else{
+                res.data[i] = 5;
+            }
+            puissance++;
+        }
+    }
+    return res;
+}
