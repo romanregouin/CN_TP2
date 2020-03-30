@@ -48,6 +48,15 @@ void PrintMatrice(matrice m){
     printf("\n\n");
 }
 
+int IsMatriceZero(matrice m){
+    for(int i=0;i<m.cols;i++){
+        if(m.data[i]!=0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void SetIdentity(matrice m, int dim){
     for(int i=0;i<dim;i++){
         m.data[i*m.cols + i] = 1;
@@ -210,11 +219,12 @@ matrice ProduitMatriciel(matrice a, matrice b){
 matrice CalculBitsParite(matrice h, matrice u){
     matrice res, H;
     H = Transpose(h);
+    PrintMatrice(H);
     res = NewMatrice(h.cols,1);
     int puissance = 0;
     int j = 0;
     for(int i=0; i< res.cols ;i++){
-        if(i==my_pow_2(puissance)){
+        if((i+1)==my_pow_2(puissance)){
             res.data[i] = 0;
             puissance++;
         }else{
@@ -222,22 +232,20 @@ matrice CalculBitsParite(matrice h, matrice u){
             j++;
         }
     }
-    PrintMatrice(res);
-    puissance = 0;
-    int result = 0;  
-    for(int i=0;i<res.cols;i++){
-        printf("puiss %i : %d\n",puissance,my_pow_2(puissance));
-        if((i+1)==my_pow_2(puissance)){
-            for(int j=0;j<H.rows;j++){
-                    result += res.data[i] * H.data[i+j*H.cols];
-            }
-            if(result%2){
-                res.data[i] = 1;
-            }else{
-                res.data[i] = 5;
-            }
-            puissance++;
+    int puissance_max = puissance-1;
+    int result = 0; 
+    int pos;
+    for(int z=0;z<H.cols;z++){
+        for(int i=0;i<res.cols;i++){
+            result += res.data[i] * H.data[z+i*H.cols];
         }
+        pos = my_pow_2(puissance_max-z)-1;
+        if(result%2){
+            res.data[pos] = 1;
+        }else{
+            res.data[pos] = 0;
+        }
+        result = 0;
     }
     return res;
 }
