@@ -249,3 +249,20 @@ matrice CalculBitsParite(matrice h, matrice u){
     }
     return res;
 }
+
+// pos 0 to H.rows-1
+int CheckPositionError(matrice Syndrome, matrice H){
+    int isEqual = 1;
+    for(int i=0;i<H.rows;i++){
+        for(int j=0;j<H.cols;j++){
+            if(H.data[j+i*H.cols]!=Syndrome.data[j]){
+                isEqual=0;
+            }
+        }
+        if(isEqual){
+            return i;
+        }
+        isEqual=1;
+    }
+    return -1;
+}
