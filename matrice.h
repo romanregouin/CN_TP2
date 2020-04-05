@@ -266,3 +266,15 @@ int CheckPositionError(matrice Syndrome, matrice H){
     }
     return -1;
 }
+
+void PrintWord(matrice u){
+    int puissance = 0;
+    for(int i=0;i<u.cols;i++){
+        if(my_pow_2(puissance)-1==i){
+            puissance++;
+        }else{
+            printf("%d",u.data[i]);
+        }
+    }
+    return;
+}

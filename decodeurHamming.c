@@ -2,19 +2,18 @@
 #include "matrice.h"
 
 int main (int argc, char** argv){
-    if(argc!=4){
-        printf("Syntaxe : %s [ n ] [ k ] [ mot à decoder ]\n",argv[0]);
+    if(argc!=3){
+        printf("Syntaxe : %s [ n ] [ mot à decoder ]\n",argv[0]);
         return EXIT_FAILURE;
     }
     int n = atoi(argv[1]); 
-    int k = atoi(argv[2]);
     int len_word = 0;
-    for(int i=0;argv[3][i]!='\0';i++){
+    for(int i=0;argv[2][i]!='\0';i++){
         len_word++;
     }
     matrice u = NewMatrice(len_word,1);
     for(int i=0;i<len_word;i++){
-        char c = argv[3][i];
+        char c = argv[2][i];
         if(c==48){
             u.data[i] = 0;
         }else if(c==49){
@@ -46,9 +45,7 @@ int main (int argc, char** argv){
         }
     }
     printf("mot décodé :");
-    for(int i=0;i<k;i++){
-        printf("%d",u.data[i]);
-    }
+    PrintWord(u);
     printf("\n");
     return EXIT_SUCCESS;
 }
