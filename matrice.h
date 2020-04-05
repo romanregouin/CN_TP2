@@ -187,7 +187,7 @@ matrice Transpose(matrice m){
     return trans;
 }
 
-void CompleteG(matrice g, matrice p){
+/*void CompleteG(matrice g, matrice p){
     int iforp = 0;
     for(int i=g.cols-p.cols;i<g.cols;i++){
         for(int j=0;j<g.rows;j++){
@@ -195,7 +195,7 @@ void CompleteG(matrice g, matrice p){
         }
         iforp++;
     }
-}
+}*/
 
 matrice ProduitMatriciel(matrice a, matrice b){
     if(a.cols!=b.rows){
@@ -219,7 +219,6 @@ matrice ProduitMatriciel(matrice a, matrice b){
 matrice CalculBitsParite(matrice h, matrice u){
     matrice res, H;
     H = Transpose(h);
-    PrintMatrice(H);
     res = NewMatrice(h.cols,1);
     int puissance = 0;
     int j = 0;

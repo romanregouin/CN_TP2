@@ -19,31 +19,10 @@ int main(int argc, char** argv){
     for(int i=0;argv[3][i]!='\0';i++){
         len_word++;
     }
-    //printf("Longuer du mot à coder : %d\n",len_word);
 
-    matrice G = NewMatrice(n,k);
-    //PrintMatrice(G);
-    SetIdentity(G,G.rows);
-    //PrintMatrice(G);
-    matrice H = NewMatrice(n,my_log_2(n)); //faire log2 de n
-
-    /* int taille;
-    int test = atoi(argv[3]);
-    int* res = GetBinaryCode(test,&taille);
-    for(int i=0;i<my_log_2(atoi(argv[3]));i++){
-        printf("res[%d]=%d\n",i,res[i]);
-    }*/
+    matrice H = NewMatrice(n,my_log_2(n));
 
     SetControleMat(H);
-    //TransformControlMat(H);
-    //printf("Matrice de Controle H :\n");
-    //PrintMatrice(H);
-
-    /*matrice P = GetPtrans(H);
-    matrice Ptrans = Transpose(P);
-    CompleteG(G,Ptrans);
-    printf("Matrice Génératrice G :\n");
-    PrintMatrice(G);*/
 
     matrice u = NewMatrice(len_word,1);
     for(int i=0;i<len_word;i++){
@@ -63,10 +42,6 @@ int main(int argc, char** argv){
     matrice tmp = CalculBitsParite(H,u);
     printf("Mot codé :\n");
     PrintMatrice(tmp);
-
-    /*matrice v = ProduitMatriciel(u,G);
-    printf("Mot encodé v :\n");
-    PrintMatrice(v);*/
 
     return EXIT_SUCCESS;
 }
